@@ -21,14 +21,16 @@ current_exec_unit_df = googlesheets4::read_sheet(
   janitor::clean_names() %>% 
   rename(urban_email = email_primary_work,
          center = cost_center) %>% 
-  mutate(full_name = paste(first_name, last_name, sep = " ")) %>% 
+  mutate(full_name = paste(first_name, last_name, sep = " "),
+         urban_email = str_to_lower(urban_email) ) %>% 
   # Remove last two rows which have postscript notes
   head(-2)
 
   
 previous_unit_df = googlesheets4::read_sheet(
   ss = "https://docs.google.com/spreadsheets/d/1uc_872Vky8668uH181eldfaFlM7b2yBf7TWxN-2Pop0/edit#gid=249044171") %>% 
-  janitor::clean_names()
+  janitor::clean_names() %>% 
+  mutate(urban_email = str_to_lower(urban_email))
 
 
 # --- Transform data -----
@@ -64,7 +66,7 @@ ppl_removed = previous_unit_df %>%
 nrow_previous = previous_unit_df %>% nrow()
 nrow_ppl_still_in = ppl_still_in_unit %>% nrow()
 nrow_ppl_removed = ppl_removed %>% nrow()
-nrow_ppl_added = ppl_added %>% nrow()
+nrow_ppl_added = ppl_newly_added %>% nrow()
 nrow_updated_unit = updated_unit_df %>% nrow()
 
 stopifnot(nrow_previous == (nrow_ppl_still_in + nrow_ppl_removed))

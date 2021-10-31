@@ -6,7 +6,7 @@ This repo contains `scripts/update-baragaining-unit-list.R`, which uses the `goo
 
   2) Run some data checks and append to previous bargaining unit lists
   
-  3) Write out current baragainig unit list into our main Google Sheet
+  3) Write out current bargaining unit list into our main Google Sheet
   
   
   
