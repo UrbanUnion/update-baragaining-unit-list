@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+~/.boxr-oauth
+.DS_Store
+.DS_Store
