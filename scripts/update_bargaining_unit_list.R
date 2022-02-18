@@ -3,6 +3,7 @@ library(googlesheets4)
 library(boxr)
 library(assertr)
 library(dotenv)
+library(testthat)
 
 # --- Set up auth -----
 
@@ -109,8 +110,14 @@ nrow_ppl_removed = ppl_removed %>% nrow()
 nrow_ppl_added = ppl_newly_added %>% nrow()
 nrow_updated_unit = updated_unit_df %>% nrow()
 
-stopifnot(nrow_previous == (nrow_ppl_still_in + nrow_ppl_removed))
-stopifnot(nrow_updated_unit == (nrow_ppl_still_in + nrow_ppl_added))
+test_that("# Rows Previously adds up", 
+                    expect_true(nrow_previous == 
+                                  (nrow_ppl_still_in + nrow_ppl_removed)))
+
+test_that("# Rows Updated adds up", 
+          expect_true(nrow_updated_unit == 
+                        (nrow_ppl_still_in + nrow_ppl_added)))
+
 
 # --- Write out data -----
 
