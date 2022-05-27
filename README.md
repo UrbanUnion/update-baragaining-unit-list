@@ -8,5 +8,10 @@ This repo contains `scripts/update-baragaining-unit-list.R`, which uses the `goo
   
   3) Write out current bargaining unit list into our main Google Sheet
   
-  
+ 
+## Requirements
+
+You will need a `.env` file in the root directory with some secrets for accssing our Box and Google acccounts. This file will be gitignored by default.
+
+
   
