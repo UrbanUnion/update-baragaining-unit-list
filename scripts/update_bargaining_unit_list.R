@@ -28,12 +28,12 @@ load_dot_env_safely <- purrr::possibly(load_dot_env,
 
 box_auth(client_id = Sys.getenv("BOX_CLIENT_ID"),
          client_secret = Sys.getenv("BOX_CLIENT_SECRET"),
-         interactive = F)
+         interactive = T)
 
 
 # --- Read in data -----
 current_exec_unit_df = boxr::box_read_excel(
-    file_id = "904453237921"
+    file_id = "931542030491"
   ) %>% 
   janitor::clean_names() %>% 
   rename(urban_email = email_primary_work,
@@ -81,7 +81,7 @@ ppl_still_in_unit = current_exec_unit_df %>%
   tidylog::inner_join(previous_unit_df %>% 
               # We want updated center full name and positions ni case they change from
               # Exec's updated list
-              select(-center, -full_name, -position, -first_name, -last_name),
+              select(-center, -full_name, -position, -first_name, -last_name, -will_change_if_supervisee, -needs_to_sign_nda),
             by = "urban_email")
 
 # Get ppl newly added
